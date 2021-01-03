@@ -21,7 +21,7 @@ function ilkSayfaAc() {
     }
 }
 
-function yeniSekme(sekmeAd, icerik) {
+function yeniSekme(sekmeAd, icerik, goster = true) {
     sayfaNo++;
     var sekme =
         '<li class="nav-item" role="presentation">' +
@@ -38,7 +38,8 @@ function yeniSekme(sekmeAd, icerik) {
 
     $(sekme).insertBefore("#sekme-ekle-li");
     $("#myTabContent").append(sayfa);
-    sayfaAc(sayfaNo);
+    if(goster)
+        sayfaAc(sayfaNo);
 }
 
 $("#sekme-ekle").click(function (event) {
@@ -87,7 +88,9 @@ $.ajax({
         console.log(sayfalar);
 
         $.each(sayfalar, function (index, sayfa) {
-            yeniSekme(sayfa.baslik, sayfa.icerik);
+            yeniSekme(sayfa.baslik, sayfa.icerik, false);
         });
+
+        ilkSayfaAc();
     }
 });
